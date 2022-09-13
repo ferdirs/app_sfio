@@ -19,8 +19,12 @@ import com.google.android.play.core.splitinstall.model.SplitInstallSessionStatus
 import com.google.common.eventbus.Subscribe
 import com.vkey.android.internal.vguard.engine.BasicThreatInfo
 import com.vkey.android.vguard.*
+import id.co.sistema.vkey.di.dataModule
+import id.co.sistema.vkey.di.viewModule
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.ThreadMode
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
 import vkey.android.vos.Vos
 import vkey.android.vos.VosWrapper
 
@@ -47,7 +51,7 @@ class HomeActivity : AppCompatActivity(), VosWrapper.Callback  {
     private lateinit var bt_bd_en : Button
     private lateinit var bt_ntf : Button
     private lateinit var bt_ef : Button
-
+    private lateinit var bt_cryptoTA: Button
 
     companion object {
         private const val TAG = "HelloActivity"
@@ -78,7 +82,12 @@ class HomeActivity : AppCompatActivity(), VosWrapper.Callback  {
         bt_bd_en = findViewById(R.id.bt_bd_en)
         bt_ntf = findViewById(R.id.bt_ntf)
         bt_ef = findViewById(R.id.bt_ef)
+        bt_cryptoTA = findViewById(R.id.bt_cryptoTA)
 
+
+        bt_cryptoTA.setOnClickListener {
+            startActivity(Intent(this , CryptoTaActivity::class.java))
+        }
 
         bt_string_to_from_file.setOnClickListener {
 

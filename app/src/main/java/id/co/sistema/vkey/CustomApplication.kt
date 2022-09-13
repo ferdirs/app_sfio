@@ -17,7 +17,11 @@ import com.google.common.eventbus.EventBus
 import com.vkey.android.internal.vguard.engine.BasicThreatInfo
 import com.vkey.android.internal.vguard.util.Config.troubleshootingId
 import com.vkey.android.vguard.*
+import id.co.sistema.vkey.di.dataModule
+import id.co.sistema.vkey.di.viewModule
 import org.json.JSONObject
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
 import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
@@ -25,6 +29,7 @@ import kotlin.collections.ArrayList
 
 class CustomApplication: Application(), VGExceptionHandler , Application.ActivityLifecycleCallbacks {
     private lateinit var tv_tid:TextView
+
 
     private var vGuardMgr: VGuard? = null
 
@@ -51,7 +56,17 @@ class CustomApplication: Application(), VGExceptionHandler , Application.Activit
         receiveVGuardBroadcast(activity)
         registerLocalBroadcast()
         setupAppProtection()
+
+        startKoin {
+            androidContext(this@CustomApplication)
+            modules(
+                dataModule,
+                viewModule
+            )
+        }
     }
+
+
 
     private fun receiveVGuardBroadcast(activity: Activity){
         broadcastRcvr = object : VGuardBroadcastReceiver(activity) {
