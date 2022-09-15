@@ -21,6 +21,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -60,6 +61,9 @@ class SfioImage : AppCompatActivity(), VosWrapper.Callback , VGExceptionHandler 
     private lateinit var bt_dec: Button
     private lateinit var iv_enc: ImageView
 
+    private lateinit var timerEnc_img: TextView
+    private lateinit var timerDec_Image: TextView
+
     private lateinit var imgURL: String
     private val SELECT_PICTURE = 1
     private lateinit var selectedImagePath: String
@@ -96,6 +100,9 @@ class SfioImage : AppCompatActivity(), VosWrapper.Callback , VGExceptionHandler 
 
         iv_enc = findViewById(R.id.iv_encr)
         bt_dec.visibility = View.GONE
+
+        timerEnc_img = findViewById(R.id.timerEnc_img)
+        timerDec_Image = findViewById(R.id.timerDec_Image)
 
         bt_pick.setOnClickListener {
             pickImg()
@@ -151,7 +158,9 @@ class SfioImage : AppCompatActivity(), VosWrapper.Callback , VGExceptionHandler 
     }
 
     private fun dec(){
+        val timer = BenchmarkTimer("SFIO" , "DecryptImage")
         try{
+            timer.startLog()
             val dec = SecureFileIO.decryptFile(imgURL , PASSWORD)
             val img = BitmapFactory.decodeByteArray(dec , 0 , dec.size)
 
@@ -161,18 +170,25 @@ class SfioImage : AppCompatActivity(), VosWrapper.Callback , VGExceptionHandler 
             File(imgURL).delete()
         }catch (e: Exception){
             Toast.makeText(this , "Decrypt Failed" , Toast.LENGTH_SHORT).show()
-
+        }finally {
+            timer.endLog()
+            timerDec_Image.text = timer.getBenchmarkTime()
         }
     }
 
     private fun enc(){
+        val timer = BenchmarkTimer("SFIO" , "EncryptImage")
         try {
+            timer.startLog()
             SecureFileIO.encryptFile(imgURL , PASSWORD)
             Toast.makeText(this , "Encrypt Success" , Toast.LENGTH_SHORT).show()
         }catch (e:Exception){
             Toast.makeText(this , "Encrypt $e" , Toast.LENGTH_LONG).show()
-
+        }finally {
+            timer.endLog()
+            timerEnc_img.text = timer.getBenchmarkTime()
         }
+
     }
 
     private fun pickImg(){

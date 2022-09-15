@@ -48,7 +48,8 @@ class BlockDataEncryption : AppCompatActivity(), VosWrapper.Callback , VGExcepti
     private lateinit var bt_dec: Button
 
     private lateinit var tv_dec_result: TextView
-
+    private lateinit var timerenc_bData: TextView
+    private lateinit var timerDec_Bdata: TextView
 
 
     companion object {
@@ -87,6 +88,8 @@ class BlockDataEncryption : AppCompatActivity(), VosWrapper.Callback , VGExcepti
         bt_dec = findViewById(R.id.bt_dc_bdata1)
 
         tv_dec_result = findViewById(R.id.tv_dc_bdata1)
+        timerenc_bData = findViewById(R.id.timerenc_bData)
+        timerDec_Bdata = findViewById(R.id.timerDec_Bdata)
 
         bt_dec.visibility = View.GONE
         bt_enc.setOnClickListener {
@@ -142,18 +145,26 @@ class BlockDataEncryption : AppCompatActivity(), VosWrapper.Callback , VGExcepti
 
 
     private fun enc() {
+        val timer = BenchmarkTimer("SFIO" , "BlockDataEncrypt")
+        timer.startLog()
         cipher  = et_inputenc.text.toString().toByteArray()
         SecureFileIO.encryptData(cipher)
-
+        timer.endLog()
+        timerenc_bData.text = timer.getBenchmarkTime()
     }
 
 
     private fun dec(){
+        val timer = BenchmarkTimer("SFIO" , "BlockDataDecrypt")
+        timer.startLog()
         try {
             SecureFileIO.decryptData(cipher)
             tv_dec_result.text = "Decrypterd File : " + String(cipher)
         }catch (e: IOException){
             Toast.makeText(this , "Eror $e" , Toast.LENGTH_SHORT).show()
+        }finally {
+            timer.endLog()
+            timerDec_Bdata.text = timer.getBenchmarkTime()
         }
 
     }

@@ -81,6 +81,16 @@
         android:layout_margin="15dp"/>
 
     <TextView
+        android:id="@+id/timerENC_Stringfromfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/et_password_input"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="ASASAS"
+        android:padding="10dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
         android:id="@+id/tv_decryptFile"
         android:layout_width="match_parent"
         android:layout_height="150dp"
@@ -129,6 +139,17 @@
         android:padding="10dp"
         android:textStyle="bold"
         tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/timerDEC_Stringfromfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/et_decrypt_password"
+            app:layout_constraintStart_toStartOf="@+id/bt_read_decrypt"
+            app:layout_constraintEnd_toEndOf="@+id/tv_stringdecrypt"
+            tools:text="ASASAS"
+            android:layout_margin="10dp"
+            tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/tv_updatepass"
@@ -204,8 +225,19 @@
         android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@+id/et_password_confirm"
         app:layout_constraintEnd_toEndOf="parent"
-        android:padding="5dp"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_margin="10dp"/>
 
+        <TextView
+            android:id="@+id/timerPass_Stringfromfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/et_password_confirm"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="ASASAS"
+            android:layout_margin="10dp"
+            tools:ignore="MissingConstraints" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

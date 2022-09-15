@@ -106,17 +106,10 @@ class CryptoTaActivity : AppCompatActivity() {
 
 
     private fun signMessage(message: String){
-//        if (vGuardManager == null) vGuardManager = VGuardFactory.getInstance()
-//
-//
-//        vGuardManager?.let{ Log.d("AA","Vos started crryptota ${it.isVosStarted}")}
-//
-
-//
         try {
             CoroutineScope(Dispatchers.IO).launch {
                 CryptoTA =taInterface.getInstance()
-                Log.d("AA", "CryptoTA get Instance")
+                Log.d("AA", "CryptoTA get Instance $CryptoTA")
 
                 CryptoTA.loadTA()
                 Log.d("AA","CryptoTA Load TA")
@@ -153,21 +146,11 @@ class CryptoTaActivity : AppCompatActivity() {
                     }
                 }
             }
-//            withContext(Dispatchers.Main){
-//                binding.tvSignedMessage.text = "Signed Message $jwt"
-//                binding.tvSignedMessage.isVisible = true
-//                Toast.makeText(applicationContext , "Message signed. . . Waiting to verify from server" , Toast.LENGTH_SHORT).show()
-//                binding.btSign.isEnabled = true
-//                binding.btDecryptTa.isEnabled = true
-//            }
-
 
         }catch (e:Exception){
             Log.d("AA", "signMessage: $e")
         }
             }
-
-
                 }
 
 

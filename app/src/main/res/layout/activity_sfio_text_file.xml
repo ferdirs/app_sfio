@@ -43,6 +43,17 @@
             android:hint="Input Password"
             />
 
+        <TextView
+            android:id="@+id/timerEnc_TextFile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/et_pass_enc"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="ASASAS"
+            android:layout_margin="10dp"
+            tools:ignore="MissingConstraints" />
+
         <Button
             android:id="@+id/bt_enc_file"
             android:layout_width="wrap_content"
@@ -85,6 +96,17 @@
             android:layout_marginTop="10dp"
             />
 
+        <TextView
+            android:id="@+id/timerPass_TextFile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/et_up_pass"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="ASASAS"
+            android:layout_margin="10dp"
+            tools:ignore="MissingConstraints" />
+
         <Button
             android:id="@+id/bt_updating"
             android:layout_width="wrap_content"
@@ -116,6 +138,17 @@
             android:layout_marginTop="40dp"
             android:hint="Input Password"
             />
+
+        <TextView
+            android:id="@+id/timerDec_TextFile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/et_pass_dec"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="ASASAS"
+            android:layout_marginTop="50dp"
+            tools:ignore="MissingConstraints" />
         
         <Button
             android:id="@+id/bt_dec"

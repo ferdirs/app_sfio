@@ -82,6 +82,17 @@
             android:layout_margin="15dp"/>
 
         <TextView
+            android:id="@+id/timerEnc_Bdatafromfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/et_password_input_bdata"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="ASASAS"
+            android:layout_margin="10dp"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
             android:id="@+id/tv_decryptFile"
             android:layout_width="match_parent"
             android:layout_height="150dp"
@@ -129,6 +140,17 @@
             tools:text="dadad"
             android:padding="10dp"
             android:textStyle="bold"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/timerDec_Bdatafromfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/et_decrypt_password_bdata"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="ASASAS"
+            android:layout_margin="10dp"
             tools:ignore="MissingConstraints" />
 
         <TextView
@@ -206,6 +228,17 @@
             app:layout_constraintTop_toBottomOf="@+id/et_password_confirm_bdata"
             app:layout_constraintEnd_toEndOf="parent"
             android:padding="5dp"/>
+
+        <TextView
+            android:id="@+id/timerPass_Bdatafromfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/et_password_confirm_bdata"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="ASASAS"
+            android:layout_margin="10dp"
+            tools:ignore="MissingConstraints" />
 
 
 

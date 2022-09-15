@@ -50,6 +50,9 @@ class StringToFromFileActivity : AppCompatActivity(), VosWrapper.Callback , VGEx
     private lateinit var bt_update_pass: Button
 
     private lateinit var tv_decrypt: TextView
+    private lateinit var timerENC_Stringfromfile: TextView
+    private lateinit var timerDEC_Stringfromfile: TextView
+    private lateinit var timerPass_Stringfromfile: TextView
 
 
     companion object {
@@ -92,6 +95,9 @@ class StringToFromFileActivity : AppCompatActivity(), VosWrapper.Callback , VGEx
 
 
         tv_decrypt = findViewById(R.id.tv_stringdecrypt)
+        timerENC_Stringfromfile = findViewById(R.id.timerENC_Stringfromfile)
+        timerDEC_Stringfromfile = findViewById(R.id.timerDEC_Stringfromfile)
+        timerPass_Stringfromfile = findViewById(R.id.timerPass_Stringfromfile)
 
         bt_save_decrypt.visibility = View.GONE
 
@@ -151,6 +157,8 @@ class StringToFromFileActivity : AppCompatActivity(), VosWrapper.Callback , VGEx
 
 
     private fun enc(){
+        val timer = BenchmarkTimer("SFIO" , "EncryptStringToFromFile")
+        timer.startLog()
         val encryptedFilePath = "${this.filesDir.absolutePath}/encryptedFile.txt"
         val data = et_input_encrypt.text.toString()
         val password = et_input_encrypt_password.text.toString() + "P@ssw0rd"
@@ -158,10 +166,13 @@ class StringToFromFileActivity : AppCompatActivity(), VosWrapper.Callback , VGEx
         SecureFileIO.encryptString(
             data, encryptedFilePath,
             password, false)
-
+        timer.endLog()
+        timerENC_Stringfromfile.text = timer.getBenchmarkTime()
     }
 
     private fun dec(){
+        val timer = BenchmarkTimer("SFIO" , "DecryptStringToFromFile")
+        timer.startLog()
         val encryptedFilePath = "${this.filesDir.absolutePath}/encryptedFile.txt"
         val password = et_input_decrypt.text.toString() + "P@ssw0rd"
         try {
@@ -169,11 +180,16 @@ class StringToFromFileActivity : AppCompatActivity(), VosWrapper.Callback , VGEx
             tv_decrypt.text = decString.toString()
         }catch (e: IOException){
             Toast.makeText(this , "Make sure the password is correct !" , Toast.LENGTH_SHORT).show()
+        }finally {
+            timer.endLog()
+            timerDEC_Stringfromfile.text = timer.getBenchmarkTime()
         }
 
     }
 
     private fun updatePass(){
+        val timer = BenchmarkTimer("SFIO" , "UpdatePasswordStringToFromFile")
+        timer.startLog()
         val encryptedFilePath = "${this.filesDir.absolutePath}/encryptedFile.txt"
         val oldPass = et_input_oldpass.text.toString() + "P@ssw0rd"
         val newPass = et_input_update_newpass.toString() + "P@ssw0rd"
@@ -187,6 +203,9 @@ class StringToFromFileActivity : AppCompatActivity(), VosWrapper.Callback , VGEx
                 Toast.makeText(this , "Password Updated" , Toast.LENGTH_SHORT).show()
             }catch (e: IOException){
                 Log.d("passeror", "updatePass: ")
+            }finally {
+                timer.endLog()
+                timerPass_Stringfromfile.text = timer.getBenchmarkTime()
             }
         }
     }

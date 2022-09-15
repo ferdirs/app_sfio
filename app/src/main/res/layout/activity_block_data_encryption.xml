@@ -40,6 +40,17 @@
             android:hint="Input Something Here"/>
 
 
+        <TextView
+            android:id="@+id/timerenc_bData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/et_enc_bdata1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="ASASAS"
+            android:layout_margin="10dp"
+            tools:ignore="MissingConstraints" />
+
 
         <Button
             android:id="@+id/bt_enc_bdata1"
@@ -87,6 +98,16 @@
             tools:text="ASAS"
             app:layout_constraintTop_toBottomOf="@+id/tv_enc"/>
 
+        <TextView
+            android:id="@+id/timerDec_Bdata"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/tv_dc_bdata1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="ASASAS"
+            android:layout_margin="10dp"
+            tools:ignore="MissingConstraints" />
 
 
 

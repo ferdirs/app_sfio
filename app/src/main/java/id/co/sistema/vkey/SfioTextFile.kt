@@ -74,7 +74,9 @@ class SfioTextFile : AppCompatActivity(), VosWrapper.Callback , VGExceptionHandl
     private lateinit var bt_dec: Button
 
     private lateinit var tv_res: TextView
-
+    private lateinit var timerEnc_TextFile:TextView
+    private lateinit var timerPass_TextFile: TextView
+    private lateinit var timerDec_TextFile: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -97,6 +99,9 @@ class SfioTextFile : AppCompatActivity(), VosWrapper.Callback , VGExceptionHandl
         bt_dec = findViewById(R.id.bt_dec)
 
         tv_res = findViewById(R.id.tv_dec_res)
+        timerEnc_TextFile = findViewById(R.id.timerEnc_TextFile)
+        timerDec_TextFile = findViewById(R.id.timerDec_TextFile)
+        timerPass_TextFile = findViewById(R.id.timerPass_TextFile)
 
         bt_enc.setOnClickListener {
             enc()
@@ -113,6 +118,7 @@ class SfioTextFile : AppCompatActivity(), VosWrapper.Callback , VGExceptionHandl
     }
 
     private fun enc(){
+        val timer = BenchmarkTimer("SFIO" , "EncryptTextFile")
         if (et_passenc.text.isEmpty()){
             Toast.makeText(this , "Passowrd" , Toast.LENGTH_SHORT).show()
             return
@@ -121,12 +127,16 @@ class SfioTextFile : AppCompatActivity(), VosWrapper.Callback , VGExceptionHandl
             existingFile()
         }
         try {
+            timer.startLog()
             val pass = et_passenc.text.toString() + "P@ssw0rd"
             SecureFileIO.encryptFile(encryptedFileLocation , pass)
             et_passenc.text.clear()
             Toast.makeText(this , "File Encrypted" , Toast.LENGTH_SHORT).show()
         }catch (e: Exception){
             Toast.makeText(this , "File Failed Encrypted" , Toast.LENGTH_SHORT).show()
+        }finally {
+            timer.endLog()
+            timerEnc_TextFile.text = timer.getBenchmarkTime()
         }
     }
 
@@ -143,10 +153,12 @@ class SfioTextFile : AppCompatActivity(), VosWrapper.Callback , VGExceptionHandl
     }
 
     private fun dec(){
+        val timer = BenchmarkTimer("SFIO" , "DecryptTextFile")
         if (et_pass_dec.text.isEmpty()){
             Toast.makeText(this , "inputpassword" , Toast.LENGTH_SHORT).show()
         }
         try {
+            timer.startLog()
             val pass = et_pass_dec.text.toString() + "P@ssw0rd"
             val txtString =com.vkey.securefileio.FileInputStream(encryptedFileLocation , pass)
                 .bufferedReader().use { it.readText() }
@@ -156,15 +168,19 @@ class SfioTextFile : AppCompatActivity(), VosWrapper.Callback , VGExceptionHandl
                 Toast.makeText(this , "Decrypted" , Toast.LENGTH_SHORT).show()
         }catch (e: Exception){
             Toast.makeText(this , "$e" , Toast.LENGTH_SHORT).show()
-
+        }finally {
+            timer.endLog()
+            timerDec_TextFile.text = timer.getBenchmarkTime()
         }
     }
 
     private fun update(){
+        val timer = BenchmarkTimer("SFIO" , "UpdateTextFile")
         if (et_up_text.text.isEmpty() && et_up_pass.text.isEmpty()){
             Toast.makeText(this , "Text and password must be filled" , Toast.LENGTH_SHORT).show()
         }
         try {
+            timer.startLog()
             val data =et_up_text.text.toString()
             val pass = et_up_pass.text.toString() + "P@ssw0rd"
             com.vkey.securefileio.FileOutputStream(encryptedFileLocation , pass).use {
@@ -175,6 +191,9 @@ class SfioTextFile : AppCompatActivity(), VosWrapper.Callback , VGExceptionHandl
             Toast.makeText(this , "Content is updated" , Toast.LENGTH_SHORT).show()
         }catch (e: Exception){
             Log.d("bugg", "update: $e")
+        }finally {
+            timer.endLog()
+            timerPass_TextFile.text = timer.getBenchmarkTime()
         }
     }
 
